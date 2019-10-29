@@ -4,6 +4,9 @@ CS 271
 Dr. Lall
 Project 6
 */
+#ifndef _List_h
+#define _List_h
+
 
 #include <iostream>
 #include <string>
@@ -73,3 +76,5 @@ class InsertError
 };
 
 #include "List.cpp"
+
+#endif

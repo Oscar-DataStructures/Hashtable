@@ -17,7 +17,7 @@ using namespace std;
 
 // ================================= Constructor ===============================
 template <class KeyType>
-HashTable<KeyType>::HashTable()
+hashtable<KeyType>::hashtable(int numSlots)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -27,7 +27,7 @@ HashTable<KeyType>::HashTable()
 
 // ============================== Copy Constructor ==============================
 template <class KeyType>
-HashTable<KeyType>::HashTable(const HashTable<KeyType>& h)
+hashtable<KeyType>::hashtable(const hashtable<KeyType>& h)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -37,7 +37,7 @@ HashTable<KeyType>::HashTable(const HashTable<KeyType>& h)
 
 // ================================= DeConstructor =============================
 template <class KeyType>
-HashTable<KeyType>::~HashTable()
+hashtable<KeyType>::~hashtable()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -47,7 +47,7 @@ HashTable<KeyType>::~HashTable()
 
 // ================================= Get Method ================================
 template <class KeyType>
-KeyType HashTable<KeyType>::get(const KeyType& k) const
+KeyType hashtable<KeyType>::get(const KeyType& k) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -57,7 +57,7 @@ KeyType HashTable<KeyType>::get(const KeyType& k) const
 
 // ================================ Insert Method ==============================
 template <class KeyType>
-void HashTable<KeyType>::insert(KeyType k)
+void hashtable<KeyType>::insert(KeyType k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -67,7 +67,7 @@ void HashTable<KeyType>::insert(KeyType k)
 
 // ================================ Remove Method ==============================
 template <class KeyType>
-void HashTable<KeyType>::remove(const KeyType& k)
+void hashtable<KeyType>::remove(const KeyType& k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -77,7 +77,7 @@ void HashTable<KeyType>::remove(const KeyType& k)
 
 // ============================= Assignment Operator ===========================
 template <class KeyType>
-HashTable<KeyType>& HashTable<KeyType>::operator=(const HashTable<KeyType>& h)
+hashtable<KeyType>& hashtable<KeyType>::operator=(const hashtable<KeyType>& h)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -87,7 +87,7 @@ HashTable<KeyType>& HashTable<KeyType>::operator=(const HashTable<KeyType>& h)
 
 // =============================== toString Method ==============================
 template <class KeyType>
-std::string HashTable<KeyType>::toString(int slot) const
+std::string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {

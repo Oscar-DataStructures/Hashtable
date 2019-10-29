@@ -10,10 +10,10 @@ Project 6
 
 #include <iostream>
 #include <string>
-#include "bst.h"
+#include "hashtable.h"
 
 template <class KeyType>
-class Dictionary : public bst<KeyType>
+class Dictionary : public hashtable<KeyType>
 {
   public:
     Dictionary(); //constructor
@@ -22,7 +22,7 @@ class Dictionary : public bst<KeyType>
 
     bool empty() const; // return true if empty; false o/w
 
-    KeyType *get(const KeyType& k) const; // return first item with key equal to k
+    KeyType get(const KeyType& k) const; // return first item with key equal to k
 
     void insert(KeyType k); // insert k into the tree, add unique key error
     void remove(const KeyType& k); // delete first item with key equal to k
