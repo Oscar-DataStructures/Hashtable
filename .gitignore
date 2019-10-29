@@ -3,6 +3,8 @@
 
 *.o
 
-imdb
-test_bst
+imdb2
+scrabble
+test_list
 test_dict
+test_hashtable
