@@ -16,21 +16,16 @@ using namespace std;
 // ================================= Constructor ===============================
 void test_defaultConstructor()
 {
-	hashtable<int> a(5);
+	hashtable<int> a(2);
+
 }
 
 
 // ============================== Copy Constructor ==============================
 void test_copyConstructor()
 {
-
-}
-
-
-// ================================= DeConstructor =============================
-void test_deConstructor()
-{
-
+	hashtable<int> a(2);
+	hashtable<int> b(a);
 }
 
 
@@ -62,10 +57,8 @@ int main()
 {
 	test_defaultConstructor();
 	cout << "Default Constructor Test		|Passed|" << endl;
-	// test_copyConstructor();
-	// cout << "Copy Constructor Test			|Passed|" << endl;
-	// test_deConstructor();
-	// cout << "DeConstructor Test			|Passed|" << endl;
+	test_copyConstructor();
+	cout << "Copy Constructor Test			|Passed|" << endl;
 	// test_insert_and_get();
 	// cout << "Insert and Get Test			|Passed|" << endl;
 	// test_remove();
