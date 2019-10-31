@@ -72,7 +72,7 @@ List<T>::~List()
 
 // =============================== Append Method ===============================
 template <class T>
-void List<T>::append(T item)
+void List<T>::append(T* item)
 {
 	Node<T>* node = new Node<T>(item);
 	if (head == NULL)
@@ -111,7 +111,7 @@ int List<T>::count(T item) const
 
 // =============================== Remove Method ===============================
 template <class T>
-void List<T>::remove(T item)
+void List<T>::remove(const T& item)
 {
 	Node<T>* current = head;
 	Node<T>* tmp = head;
@@ -141,7 +141,7 @@ void List<T>::remove(T item)
 
 // =============================== Insert Method ===============================
 template <class T>
-void List<T>::insert(int index, T item)
+T* List<T>::insert(int index, T* item)
 {
 	Node<T>* temp = new Node<T>(item);
 	Node<T>* node = head;

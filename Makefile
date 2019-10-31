@@ -1,14 +1,9 @@
 
 CPPOPTIONS = -c -g -Wall -std=c++0x
 
-all: test_list test_dict test_hashtable imdb2 scrabble
+all: test_dict test_hashtable imdb2 scrabble
 
 //==============================================================================
-test_list.o: test_list.cpp List.h List.cpp
-	g++ $(CPPOPTIONSS) -c test_list.cpp
-
-test_list: test_list.o
-	g++ -o test_list test_list.o
 
 test_dict.o: test_dict.cpp dict.h dict.cpp
 	g++ $(CPPOPTIONSS) -c test_dict.cpp

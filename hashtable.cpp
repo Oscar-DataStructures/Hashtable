@@ -47,7 +47,7 @@ hashtable<KeyType>::~hashtable()
 
 // ================================= Get Method ================================
 template <class KeyType>
-KeyType hashtable<KeyType>::get(const KeyType& k) const
+KeyType* hashtable<KeyType>::get(const KeyType& k) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -58,7 +58,7 @@ KeyType hashtable<KeyType>::get(const KeyType& k) const
 
 // ================================ Insert Method ==============================
 template <class KeyType>
-void hashtable<KeyType>::insert(KeyType k)
+void hashtable<KeyType>::insert(KeyType* k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {

@@ -19,30 +19,23 @@ class Node
 		Node(T d);
 		Node(Node* p, T d);
 
-	private:
-		T data;
-		Node* next;
-
-	template <class U>
-	friend class List;
-
-	template <class V>
-	friend class hashtable;
+		T* data;
+		Node<T>* next;
 };
 
 
 template <class T>
-class List //TODO: Figure out using inheritence
+class List : public Node<T>
 {
   public:
     List(); // default constructor
     List(const List<T>& src); // copy constructor
     ~List(); // destructor
 
-    void append(T item); // append a new item to the end of the list
+    void append(T* item); // append a new item to the end of the list
     int count(T item) const; // return the number of times a item is in the list
-		void remove(T item); // delete the first instance of the item
-    void insert(int index, T item); // insert item in position index
+		void remove(const T& item); // delete the first instance of the item
+    T* insert(int index, T* item); // insert item in position index
 		void pop(int index); // delete the item in position index
 		int length() const; // returns the length of the list
 		int index(T item) const; // return index of value item, or -1 if not found
@@ -52,14 +45,10 @@ class List //TODO: Figure out using inheritence
     List<T>& operator=(const List& src); // assignment operator
 		//friend class ostream &operator<< (ostream &out, const List<T> &list); // not sure, right track i think?
 
-	protected:
 		Node<T>* head;
 		Node<T>* tail;
 		int size;
 		List<T>& deepCopy(const List<T>& src);
-
-		template <class W>
-		friend class hashtable;
 };
 
 //===============================Error Catches==================================
