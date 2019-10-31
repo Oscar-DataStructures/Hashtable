@@ -14,81 +14,86 @@ using namespace std;
 
 
 
-// // ================================= Constructor ===============================
-// template <class KeyType>
-// Dictionary<KeyType>::Dictionary() : hashtable<KeyType>(int numSlots)
-// //Preconditions:  N/A
-// //Postcondition:  Inherits bst constructor
-// {
-//
-// }
-//
-//
-// // =============================== Copy Constructor ============================
-// template <class KeyType>
-// Dictionary<KeyType>::Dictionary(const Dictionary<KeyType>& dict) : hashtable<KeyType>(dict)
-// //Preconditions:    N/A
-// //Postcondition:    Inherits bst copy constructor
-// {
-//
-// }
+// ================================= Constructor ===============================
+template <class KeyType>
+Dictionary<KeyType>::Dictionary() : hashtable<KeyType>(int numSlots)
+//Preconditions:  N/A
+//Postcondition:  Inherits bst constructor
+{
+
+}
 
 
-// // ================================= Empty Method ==============================
-// template <class KeyType>
-// bool Dictionary<KeyType>::empty() const
-// //Preconditions:  Tree must exist
-// //Postcondition:  Inherits bst empty method to return whether the dict is empty
-// {
-//   return bst<KeyType>::empty();     //bst inheritance
-// }
+// =============================== Copy Constructor ============================
+template <class KeyType>
+Dictionary<KeyType>::Dictionary(const Dictionary<KeyType>& dict) : hashtable<KeyType>(dict)
+//Preconditions:    N/A
+//Postcondition:    Inherits bst copy constructor
+{
+
+}
 
 
-// // ================================= Get Method ================================
-// template <class KeyType>
-// KeyType* Dictionary<KeyType>::get(const KeyType& k) const
-// //Preconditions:    Tree must exist
-// //Postcondition:    Inherits bst helpGet method to return key of dict or null if not found
-// {
-//   Node<KeyType>* output = bst<KeyType>::helpGet(k);     //bst inheritance
-//   if (output != NULL)
-//   {
-//     return &(output->key);
-//   }
-//
-//   else
-//   {
-//     return NULL;
-//   }
-// }
+// ================================= Empty Method ==============================
+template <class KeyType>
+bool Dictionary<KeyType>::empty() const
+//Preconditions:  Tree must exist
+//Postcondition:  Inherits bst empty method to return whether the dict is empty
+{
+  int size = 0;
+  for (list : table)
+  {
+    size += list.length();
+  }
+  return size == 0;
+}
 
 
-// // ================================ Insert Method ==============================
-// template <class KeyType>
-// void Dictionary<KeyType>::insert(KeyType k)
-// // PreConditions:   N/A
-// // PostConditions:  Inherits bst insert method to insert into dict value k
-// {
-//   Node<KeyType>* exists = bst<KeyType>::helpGet(k);
-//
-//   if (exists == NULL)
-//   {
-//     bst<KeyType>::insert(k);      //bst inheritance
-//   }
-//
-//   else
-//   {
-//     throw KeyError();             //KeyError caught
-//   }
-//
-// }
+// ================================= Get Method ================================
+template <class KeyType>
+KeyType* Dictionary<KeyType>::get(const KeyType& k) const
+//Preconditions:    Tree must exist
+//Postcondition:    Inherits bst helpGet method to return key of dict or null if not found
+{
+  Node<KeyType>* output = bst<KeyType>::helpGet(k);     //bst inheritance
+  if (output != NULL)
+  {
+    return &(output->key);
+  }
+
+  else
+  {
+    return NULL;
+  }
+}
 
 
-// // ================================ Remove Method ==============================
-// template <class KeyType>
-// void Dictionary<KeyType>::remove(const KeyType& k)
-// //Preconditions:  Tree must exist
-// //Postcondition:  Inherits remove method from bst to remove value k from dict
-// {
-//   bst<KeyType>::remove(k);      //bst inheritance
-// }
+// ================================ Insert Method ==============================
+template <class KeyType>
+void Dictionary<KeyType>::insert(KeyType k)
+// PreConditions:   N/A
+// PostConditions:  Inherits bst insert method to insert into dict value k
+{
+  Node<KeyType>* exists = bst<KeyType>::helpGet(k);
+
+  if (exists == NULL)
+  {
+    bst<KeyType>::insert(k);      //bst inheritance
+  }
+
+  else
+  {
+    throw KeyError();             //KeyError caught
+  }
+
+}
+
+
+// ================================ Remove Method ==============================
+template <class KeyType>
+void Dictionary<KeyType>::remove(const KeyType& k)
+//Preconditions:  Tree must exist
+//Postcondition:  Inherits remove method from bst to remove value k from dict
+{
+  bst<KeyType>::remove(k);      //bst inheritance
+}
