@@ -274,12 +274,11 @@ List<T>& List<T>::operator=(const List<T>& src)
 
 
 // ===================== Stream Insertion Operator Method ======================
-// template <class T>
-// ostream &operator << (ostream &out, List<t> &list)
-// {
-// 	out <<list.toString();
-// 	return out;
-// }
+template <class T>
+ostream &operator<< (ostream &os, const List<T>& list)
+{
+	return os << list.toString() << endl;
+}
 
 
 

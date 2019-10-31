@@ -11,6 +11,9 @@ Project 6
 #include <iostream>
 #include <string>
 
+using namespace std;
+
+
 template <class T>
 class Node
 {
@@ -43,13 +46,17 @@ class List : public Node<T>
 
     T& operator[](int index) const; // indexing operator
     List<T>& operator=(const List& src); // assignment operator
-		//friend class ostream &operator<< (ostream &out, const List<T> &list); // not sure, right track i think?
+
 
 		Node<T>* head;
 		Node<T>* tail;
 		int size;
 		List<T>& deepCopy(const List<T>& src);
 };
+
+template <class T>
+ostream &operator<< (ostream &os, const List<T>& list);
+
 
 //===============================Error Catches==================================
 class IndexError

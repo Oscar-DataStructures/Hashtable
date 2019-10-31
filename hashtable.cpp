@@ -8,6 +8,7 @@ Project 6
 
 #include <sstream>
 #include <string>
+#include <iostream>
 #include <typeinfo>
 
 
@@ -21,7 +22,8 @@ hashtable<KeyType>::hashtable(int numSlots)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-
+  slots = numSlots;
+  table = new List<int>[numSlots];
 }
 
 
