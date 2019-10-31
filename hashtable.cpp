@@ -24,6 +24,10 @@ hashtable<KeyType>::hashtable(int numSlots)
 {
   slots = numSlots;
   table = new List<int>[numSlots];
+  for(int i = 0; i < table->size; i++)
+  {
+    table[i].head = NULL;
+  }
 }
 
 

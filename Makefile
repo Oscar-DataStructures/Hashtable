@@ -1,7 +1,7 @@
 
 CPPOPTIONS = -c -g -Wall -std=c++0x
 
-all: test_dict test_hashtable imdb2 scrabble
+all: test_dict test_hashtable imdb2
 
 //==============================================================================
 
@@ -22,12 +22,6 @@ imdb2.o: imdb2.cpp hashtable.h hashtable.cpp
 
 imdb2: imdb2.o
 	g++ -o imdb2 imdb2.o
-
-scrabble.o: scrabble.cpp hashtable.h hashtable.cpp
-	g++ $(CPPOPTIONSS) -c scrabble.cpp
-
-scrabble: scrabble.o
-	g++ -o scrabble scrabble.o
 
 //==============================================================================
 //==============================================================================
