@@ -11,11 +11,11 @@ Project 6
 #include <cassert>
 #include "dict.h"
 
-struct KVPair
-{
-	string key;
-	string value;
-};
+// struct KVPair
+// {
+// 	string key;
+// 	string value;
+// };
 
 // // ============================= Operator Overloading ==========================
 // ostream& operator<<(ostream& os, const KVPair& dt)

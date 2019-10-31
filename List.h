@@ -25,11 +25,14 @@ class Node
 
 	template <class U>
 	friend class List;
+
+	template <class V>
+	friend class hashtable;
 };
 
 
 template <class T>
-class List
+class List //TODO: Figure out using inheritence
 {
   public:
     List(); // default constructor
@@ -49,11 +52,14 @@ class List
     List<T>& operator=(const List& src); // assignment operator
 		//friend class ostream &operator<< (ostream &out, const List<T> &list); // not sure, right track i think?
 
-	private:
+	protected:
 		Node<T>* head;
 		Node<T>* tail;
 		int size;
 		List<T>& deepCopy(const List<T>& src);
+
+		template <class W>
+		friend class hashtable;
 };
 
 //===============================Error Catches==================================

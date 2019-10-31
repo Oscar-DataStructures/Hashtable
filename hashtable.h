@@ -11,7 +11,7 @@ Project 6
 #include <string>
 
 template <class KeyType>
-class hashtable
+class hashtable //TODO: Figure out using inheritence
 {
   public:
     hashtable(int numSlots);
@@ -27,7 +27,7 @@ class hashtable
 
   private:
     int slots;
-    List<KeyType> *table; // an array of List<KeyType>’s
+    List<KeyType>* table; // an array of List<KeyType>’s
 };
 
 #include "hashtable.cpp"

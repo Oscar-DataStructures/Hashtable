@@ -52,6 +52,7 @@ KeyType hashtable<KeyType>::get(const KeyType& k) const
 //Postcondition:  N/A
 {
 
+  //if collision then search in list T[h(k)] for key k
 }
 
 
@@ -62,6 +63,8 @@ void hashtable<KeyType>::insert(KeyType k)
 //Postcondition:  N/A
 {
 
+
+  //if collisino insert x at the head of list T[h(x.key)]
 }
 
 
@@ -72,6 +75,7 @@ void hashtable<KeyType>::remove(const KeyType& k)
 //Postcondition:  N/A
 {
 
+  //if collision then delete x from list T[h(x.key)]
 }
 
 
@@ -87,9 +91,9 @@ hashtable<KeyType>& hashtable<KeyType>::operator=(const hashtable<KeyType>& h)
 
 // =============================== toString Method ==============================
 template <class KeyType>
-std::string hashtable<KeyType>::toString(int slot) const
+string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-
+  //string s = List<KeyType>::toString()
 }
