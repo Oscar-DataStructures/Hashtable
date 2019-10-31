@@ -21,7 +21,7 @@ Node<T>::Node()
 
 // ============================ Second Node Constructor ========================
 template <class T>
-Node<T>::Node(T d)
+Node<T>::Node(T* d)
 {
 	data = d;
 	next = NULL;
@@ -30,7 +30,7 @@ Node<T>::Node(T d)
 
 // ============================= Third Node Constructor ========================
 template <class T>
-Node<T>::Node(Node* p, T d)
+Node<T>::Node(Node* p, T* d)
 {
 	data = d;
 }
@@ -306,6 +306,7 @@ template <class T>
  List<T>& List<T>::deepCopy(const List<T>& src)
  {
 	 Node<T>* current = src.head;
+	 cout << src.size << endl;
 		 for(int i=0; i < src.size; i++)  //sets each node equal to desired node data
 		 {
 			 append(current-> data);
@@ -314,7 +315,6 @@ template <class T>
 				 current = current-> next;
 		 	 }
 		 }
-
 
 	 return *this;
  }

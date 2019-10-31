@@ -18,12 +18,14 @@ template <class T>
 class Node
 {
 	public:
-		Node();
-		Node(T d);
-		Node(Node* p, T d);
-
 		T* data;
 		Node<T>* next;
+
+		Node();
+		Node(T* d);
+		Node(Node* p, T* d);
+
+
 };
 
 

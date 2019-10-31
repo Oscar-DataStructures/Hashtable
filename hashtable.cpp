@@ -37,7 +37,13 @@ hashtable<KeyType>::hashtable(const hashtable<KeyType>& h)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-
+  slots = h.slots;
+  table = new List<int>[slots];
+  table->size = h.table->size;
+  for(int i = 0; i < table->size; i++)
+  {
+    table[i] = List<KeyType>::deepCopy(h.table[i]);
+  }
 }
 
 
@@ -47,7 +53,10 @@ hashtable<KeyType>::~hashtable()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-
+  for(int i = 0; i < table->size; i++)
+  {
+    List<KeyType>::~List();
+  }
 }
 
 
@@ -69,7 +78,6 @@ void hashtable<KeyType>::insert(KeyType* k)
 //Postcondition:  N/A
 {
 
-
   //if collisino insert x at the head of list T[h(x.key)]
 }
 
@@ -82,6 +90,16 @@ void hashtable<KeyType>::remove(const KeyType& k)
 {
 
   //if collision then delete x from list T[h(x.key)]
+}
+
+
+// ================================= Hash Method ===============================
+template <class KeyType>
+int hashtable<KeyType>::hash(int slots)
+//Preconditions:  N/A
+//Postcondition:  N/A
+{
+
 }
 
 
@@ -101,5 +119,6 @@ string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  //string s = List<KeyType>::toString()
+  // table[slot].toString();
+
 }
