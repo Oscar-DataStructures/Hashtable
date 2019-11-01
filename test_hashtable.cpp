@@ -57,7 +57,6 @@ struct Pair
 	{
 		return key <= p.key;
 	}
-
 };
 
 // ================================= Constructor ===============================
@@ -65,6 +64,7 @@ void test_defaultConstructor()
 {
 	hashtable<Pair> t1(10);
 	assert(t1.slots == 10);
+
 	hashtable<Pair> t2(20);
 	assert(t2.slots == 20);
 }
@@ -86,13 +86,40 @@ void test_insert_and_get()
 	p.key = "key";
 	p.value = "value";
 
-	hashtable<Pair> t1(10);
-	int result = p.hash(t1.slots);
-	Pair* pPoint = &p;
-	// t1.insert(pPoint);
-	// cout << t1.get(p) << endl;
-	//cout << t1.toString(result) << endl;
+	Pair pCopy;						//collision test
+	pCopy.key = "key";
+	pCopy.value = "value";
 
+	Pair p1;
+	p1.key = "dog";
+	p1.value = "cat";
+
+	Pair p2;
+	p2.key = "rain";
+	p2.value = "snow";
+	hashtable<Pair> t1(10);			//table1
+
+
+	int result = p.hash(t1.slots);
+	int result1 = p1.hash(t1.slots);
+	int result2 = p2.hash(t1.slots);
+
+
+	Pair* pPoint = &p;
+	t1.insert(pPoint);
+
+	Pair* pCopyPoint = &pCopy;		//used to test collision
+	t1.insert(pCopyPoint);
+
+	Pair* pPoint1 = &p1;
+	t1.insert(pPoint1);
+
+	Pair* pPoint2 = &p2;
+	t1.insert(pPoint2);
+
+	cout << t1.get(p) << endl;
+
+	//cout << t1.toString(result) << endl;
 }
 
 
@@ -103,6 +130,10 @@ void test_remove()
 	p.key = "key";
 	p.value = "value";
 
+	Pair pCopy;						//collision test
+	pCopy.key = "key";
+	pCopy.value = "value";
+
 	Pair p1;
 	p1.key = "dog";
 	p1.value = "cat";
@@ -110,36 +141,32 @@ void test_remove()
 	Pair p2;
 	p2.key = "rain";
 	p2.value = "snow";
+	hashtable<Pair> t1(10);		//table1
 
-	hashtable<Pair> t1(10);
+
+	int result = p.hash(t1.slots);
+	int result1 = p1.hash(t1.slots);
+	int result2 = p2.hash(t1.slots);
+
+
+
 	Pair* pPoint = &p;
 	t1.insert(pPoint);
-	cout << t1.table[p.hash(t1.slots)].head->data->key << endl;
+
+	Pair* pCopyPoint = &pCopy;		//used to test collision
+	t1.insert(pCopyPoint);
 
 	Pair* pPoint1 = &p1;
 	t1.insert(pPoint1);
-	cout << t1.table[p1.hash(t1.slots)].head->data->key << endl;
+
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
-	cout << t1.table[p2.hash(t1.slots)].head->data->key << endl;
 
-	int result = p.hash(t1.slots);
-	//cout << t1.toString(result) << endl;
-	try
-	{
-		t1.remove(p);
-	}
-	catch(KeyError)
-	{
-		cout << "Key Error" << endl;
-	}
-	//t1.remove(p);
-	cout << "first remove" << endl;
+
+	t1.remove(p);
+	t1.remove(p);
 	t1.remove(p1);
 	t1.remove(p2);
-
-	result = p.hash(t1.slots);
-	//cout << t1.toString(result) << endl;
 }
 
 
@@ -150,6 +177,10 @@ void test_operator()
 	p.key = "key";
 	p.value = "value";
 
+	Pair pCopy;						//collision test
+	pCopy.key = "key";
+	pCopy.value = "value";
+
 	Pair p1;
 	p1.key = "dog";
 	p1.value = "cat";
@@ -157,10 +188,20 @@ void test_operator()
 	Pair p2;
 	p2.key = "rain";
 	p2.value = "snow";
+	hashtable<Pair> t1(10);			//table1
 
-	hashtable<Pair> t1(10);
+
+	int result = p.hash(t1.slots);
+	int result1 = p1.hash(t1.slots);
+	int result2 = p2.hash(t1.slots);
+
+
+
 	Pair* pPoint = &p;
 	t1.insert(pPoint);
+
+	Pair* pCopyPoint = &pCopy;		//used to test collision
+	t1.insert(pCopyPoint);
 
 	Pair* pPoint1 = &p1;
 	t1.insert(pPoint1);
@@ -168,18 +209,14 @@ void test_operator()
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
 
-	hashtable<Pair> t2(10);
-	int result = p.hash(t1.slots);
+	hashtable<Pair> t2(10);					//table2
 	t2 = t1;
-	//cout << t2.toString(result) << endl;
 
 	t1.remove(p);
 	t1.remove(p1);
 	t1.remove(p2);
 
-	result = p.hash(t1.slots);
 	t2 = t1;
-	//cout << t2.toString(result) << endl;
 }
 
 
@@ -196,8 +233,8 @@ int main()
 	cout << "Insert and Get Test			|Passed|" << endl;
 	test_remove();
 	cout << "Remove Test				|Passed|" << endl;
-  // test_operator();
-  // cout << "Insert and Get Test			|Passed|" << endl;
+  test_operator();
+  cout << "Operator Test				|Passed|" << endl;
 
 	return 0;
 }

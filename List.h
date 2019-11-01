@@ -40,6 +40,7 @@ class List : public Node<T>
     ~List(); // destructor
 
     void append(T* item); // append a new item to the end of the list
+		void headAppend(T* item); //append a new item to the head of the list
     int count(T item) const; // return the number of times a item is in the list
 		void remove(const T& item); // delete the first instance of the item
     T* insert(int index, T* item); // insert item in position index
@@ -79,6 +80,12 @@ class InsertError
 {
 	public:
 		std::string message = "INSERT ERROR";
+};
+
+class KeyError
+{
+	public:
+		std::string message = "KEY ERROR";
 };
 
 #include "List.cpp"

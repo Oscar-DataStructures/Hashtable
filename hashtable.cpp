@@ -75,8 +75,13 @@ KeyType* hashtable<KeyType>::get(const KeyType& k) const  //TODO [ASK]: why cons
 
   else    //found so return pointer
   {
-    KeyType* kFound = &k;
-    return kFound;
+    for(int i = 0; i < table->size; i++)    //iterates throughout the table
+    {
+      if ((table[hSlots][i]) == k)    //so the logic here is that we find the element in the list and return the pointer to it
+      {                                //that way we dont have to return k which is const
+        return table[hSlots][i];
+      }
+    }
   }
 }
 
@@ -88,17 +93,9 @@ void hashtable<KeyType>::insert(KeyType* k) //TODO [CHECK]: might need to change
 //Postcondition:  k will be inserted into the hashtable at the apriopiate slot
 {
   int hSlots = k->hash(slots);
-  Node<KeyType>* insNode = new Node<KeyType>(k);
-  Node<KeyType>* current = table[hSlots].head;
-  cout << table[hSlots].head << endl;
-  if (table[hSlots].head == NULL)
-  {
-    table[hSlots].head = insNode;
-    return;
-  }
-  insNode->next = current;
-  table[hSlots].head = insNode;
+  table[hSlots].headAppend(k);
 }
+
 
 
 // ================================ Remove Method ==============================
@@ -108,14 +105,7 @@ void hashtable<KeyType>::remove(const KeyType& k)   //TODO[ASK]: how const chang
 //Postcondition:  k will be removed from the hashtable if it exists, if it doesnt then KeyError
 {
   int hSlots = k.hash(slots);
-  int result = table[hSlots].index(k);    //index method returns -1 if not found and index if found
-  if (result == -1)   //not found
-  {
-    throw KeyError();
-  }
-  else
-    table[hSlots].remove(k);    //calls the list remove
-
+  table[hSlots].remove(k);    //calls the list remove which has key error catch
 }
 
 
@@ -140,8 +130,8 @@ string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  Return string representation of linked list at slot
 {
+  cout << table[slot].size << endl;
   string result = table[slot].toString();   //uses the list toString method
 
   return result;
-
 }

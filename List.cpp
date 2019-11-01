@@ -92,6 +92,28 @@ void List<T>::append(T* item)
 }
 
 
+// ============================ Head Append Method =============================
+template <class T>
+void List<T>::headAppend(T* item)
+{
+	Node<T>* node = new Node<T>(item);
+	if (head == NULL)	//empty list
+	{
+		head = node;
+		tail = node;
+	}
+
+	else
+	{
+		head->next = node;
+		head = node;
+	}
+
+	size++;
+
+}
+
+
 // ================================ Count Method ===============================
 template <class T>
 int List<T>::count(T item) const
@@ -116,24 +138,29 @@ void List<T>::remove(const T& item)
 	Node<T>* current = head;
 	Node<T>* tmp = head;
 
-	if (size == 0)
+	if (size == 0)		//delete first item
 	{
 		delete current;
 		return;
 	}
 
-	while (current->next != NULL && *current->next->data != item)
+	while (current->next != NULL && *current->next->data != item)	//traverse the list
 	{
 		tmp = current;
 		current = current->next;
 
-		if (current->next == NULL && *current->next->data == item)
-			{
+		if (current->next == NULL && *current->next->data == item)	//item found
+		{
 				tmp = current->next;
 				current->next = current->next->next;
 				delete tmp;
 				return;
-			}
+		}
+
+		else
+		{
+			throw KeyError();
+		}
 	}
 	size--;
 }
@@ -281,23 +308,28 @@ ostream &operator<< (ostream &os, const List<T>& list)
 }
 
 
-
 // ============================= To String Method ==============================
 template <class T>
 std::string List<T>::toString() const
 {
   std::stringstream ss;
-  Node<T>* current= head;
+  Node<T>* current = head;
+
   ss << "[";
   ss << current->data;
   for (int i = 1; i < size; i++)
   {
+		if (current->next == NULL)	//if next is null then we can stop there
+		{
+			break;
+		}
     ss << ", ";
-    current= current->next;
-    ss << current->data;
+    current = current->next;
+    ss << current->data;		//error here
   }
+
   ss << "]";
-    return ss.str();
+  return ss.str();
 }
 
 

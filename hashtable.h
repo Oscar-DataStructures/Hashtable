@@ -31,11 +31,6 @@ class hashtable : public List<KeyType>
     List<KeyType>* table; // an array of linked lists. ie slots
 };
 
-class KeyError
-{
-	public:
-		std::string message = "KEY ERROR";
-};
 
 
 #include "hashtable.cpp"
