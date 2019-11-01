@@ -23,7 +23,7 @@ hashtable<KeyType>::hashtable(int numSlots)
 //Postcondition:  N/A
 {
   slots = numSlots;
-  table = new List<int>[numSlots];
+  table = new List<KeyType>[numSlots];
   for(int i = 0; i < table->size; i++)
   {
     table[i].head = NULL;
@@ -38,7 +38,7 @@ hashtable<KeyType>::hashtable(const hashtable<KeyType>& h)
 //Postcondition:  N/A
 {
   slots = h.slots;
-  table = new List<int>[slots];
+  table = new List<KeyType>[slots];
   table->size = h.table->size;
   for(int i = 0; i < table->size; i++)
   {
@@ -66,6 +66,17 @@ KeyType* hashtable<KeyType>::get(const KeyType& k) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  int hSlots = k->hash(slots);
+  int result = table[hSlots].index();
+  if (result == -1)
+  {
+    throw KeyError();
+  }
+
+  else
+  {
+    return *k;
+  }
 
   //if collision then search in list T[h(k)] for key k
 }
@@ -77,7 +88,15 @@ void hashtable<KeyType>::insert(KeyType* k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  k->hash(slots);
+  int hSlots = k->hash(slots);
+  Node<KeyType>* current = table[hSlots].head;
+  if (table[hSlots].head == NULL)
+  {
+    table[hSlots].head = k;
+    return;
+  }
+  current->next = k;
+  table[hSlots].head = k;
 
   //if collisino insert x at the head of list T[h(x.key)]
 }
@@ -89,18 +108,10 @@ void hashtable<KeyType>::remove(const KeyType& k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  int hSlots = k->hash(slots);
+  table[hSlots].remove(k);
 
   //if collision then delete x from list T[h(x.key)]
-}
-
-
-// ================================= Hash Method ===============================
-template <class KeyType>
-int hashtable<KeyType>::hash(int slots)
-//Preconditions:  N/A
-//Postcondition:  N/A
-{
-
 }
 
 
@@ -110,7 +121,12 @@ hashtable<KeyType>& hashtable<KeyType>::operator=(const hashtable<KeyType>& h)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  for (int i = 0; i < table->size; i++)
+  {
+    table[i] = h.table[i];
+  }
 
+  return *this;
 }
 
 
@@ -120,6 +136,8 @@ string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  // table[slot].toString();
+  string result = table[slot].toString();
+
+  return result;
 
 }
