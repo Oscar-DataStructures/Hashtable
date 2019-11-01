@@ -90,12 +90,13 @@ void hashtable<KeyType>::insert(KeyType* k) //TODO [CHECK]: might need to change
   int hSlots = k->hash(slots);
   Node<KeyType>* insNode = new Node<KeyType>(k);
   Node<KeyType>* current = table[hSlots].head;
+  cout << table[hSlots].head << endl;
   if (table[hSlots].head == NULL)
   {
     table[hSlots].head = insNode;
     return;
   }
-  insNode->next = table[hSlots].head;
+  insNode->next = current;
   table[hSlots].head = insNode;
 }
 

@@ -28,6 +28,36 @@ struct Pair
 		return (sum % slots);
 	}
 
+	bool operator==(const Pair p)
+	{
+		return key == p.key;
+	}
+
+	bool operator!=(const Pair p)
+	{
+		return key != p.key;
+	}
+
+	bool operator<(const Pair p)
+	{
+		return key < p.key;
+	}
+
+	bool operator>(const Pair p)
+	{
+		return key > p.key;
+	}
+
+	bool operator>=(const Pair p)
+	{
+		return key >= p.key;
+	}
+
+	bool operator<=(const Pair p)
+	{
+		return key <= p.key;
+	}
+
 };
 
 // ================================= Constructor ===============================
@@ -84,17 +114,27 @@ void test_remove()
 	hashtable<Pair> t1(10);
 	Pair* pPoint = &p;
 	t1.insert(pPoint);
+	cout << t1.table[p.hash(t1.slots)].head->data->key << endl;
 
 	Pair* pPoint1 = &p1;
 	t1.insert(pPoint1);
-
+	cout << t1.table[p1.hash(t1.slots)].head->data->key << endl;
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
+	cout << t1.table[p2.hash(t1.slots)].head->data->key << endl;
 
 	int result = p.hash(t1.slots);
 	//cout << t1.toString(result) << endl;
-
-	t1.remove(p);
+	try
+	{
+		t1.remove(p);
+	}
+	catch(KeyError)
+	{
+		cout << "Key Error" << endl;
+	}
+	//t1.remove(p);
+	cout << "first remove" << endl;
 	t1.remove(p1);
 	t1.remove(p2);
 
@@ -154,8 +194,8 @@ int main()
 	cout << "Copy Constructor Test			|Passed|" << endl;
 	test_insert_and_get();
 	cout << "Insert and Get Test			|Passed|" << endl;
-	// test_remove();
-	// cout << "Remove Test				|Passed|" << endl;
+	test_remove();
+	cout << "Remove Test				|Passed|" << endl;
   // test_operator();
   // cout << "Insert and Get Test			|Passed|" << endl;
 

@@ -122,12 +122,12 @@ void List<T>::remove(const T& item)
 		return;
 	}
 
-	while (current->next != NULL && current->next->data != item)
+	while (current->next != NULL && *current->next->data != item)
 	{
 		tmp = current;
 		current = current->next;
 
-		if (current->next == NULL && current->next->data == item)
+		if (current->next == NULL && *current->next->data == item)
 			{
 				tmp = current->next;
 				current->next = current->next->next;
@@ -223,11 +223,11 @@ T* List<T>::insert(int index, T* item)
    Node<T>* current = head;
    for(int i = 0; i < size; i++)  //goes through all nodes until index and gets data at index
    {
-     if (item == current-> data)
+		 cout << "item: " << item.key << " data: " << current->data->key << endl;
+     if (item == *current-> data)
        return i;
      else
        current = current-> next;
-
    }
 
    return -1;

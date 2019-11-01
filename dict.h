@@ -36,14 +36,15 @@ Project 6
 //
 //
 //     bool empty() const; // return true if empty; false o/w
-// 
-//     KeyType get(const KeyType1& k) const; // return first item with key equal to k
+//
+//     Pair<KeyType1, KeyType2>* get(const KeyType1& k) const; // return first item with key equal to k
 //
 //     void insert(KeyType1 k, KeyType2 v); // insert k into the tree, add unique key error
 //     void remove(const KeyType1& k); // delete first item with key equal to k
 //
 //     using hashtable<Pair<KeyType1, KeyType2>>::table;
 // };
+//
 //
 // #include "dict.cpp"
 //
