@@ -23,7 +23,6 @@ class hashtable : public List<KeyType>
     KeyType* get(const KeyType& k) const;
     void insert(KeyType* k);
     void remove(const KeyType& k);
-    int hash(int slots);
 
     hashtable<KeyType>& operator=(const hashtable<KeyType>& h);
     std::string toString(int slot) const;

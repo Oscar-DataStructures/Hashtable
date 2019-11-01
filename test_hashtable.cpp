@@ -12,6 +12,14 @@ Project 6
 
 using namespace std;
 
+struct Pair
+{
+	string key;
+	string value;
+
+	public:
+		int hash(int slots)
+};
 
 // ================================= Constructor ===============================
 void test_defaultConstructor()

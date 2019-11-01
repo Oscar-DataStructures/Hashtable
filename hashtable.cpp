@@ -77,6 +77,7 @@ void hashtable<KeyType>::insert(KeyType* k)
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  k->hash(slots);
 
   //if collisino insert x at the head of list T[h(x.key)]
 }
