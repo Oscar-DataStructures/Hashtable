@@ -1,9 +1,11 @@
 /*
-Oscar Martinez
+Austin Burgess, Oscar Martinez
 CS 271
 Dr. Lall
 Project 6
 */
+
+
 #ifndef _List_h
 #define _List_h
 
