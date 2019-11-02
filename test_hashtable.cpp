@@ -9,6 +9,8 @@ Project 6
 #include <string>
 #include <cassert>
 #include "hashtable.h"
+#include <cmath>
+#include <math.h>
 
 using namespace std;
 
@@ -24,8 +26,10 @@ struct Pair
 		{
 			sum += int(key[i]);
 		}
+		int m = 3079;
+		float A = (sqrt(5) - 1) / 2;
 
-		return (sum % slots);
+		return int(m * (sum * A)) % slots;
 	}
 
 	bool operator==(const Pair p)
@@ -59,14 +63,22 @@ struct Pair
 	}
 };
 
+std::ostream& operator<<(ostream& os, Pair p)
+{
+	return os << "{" + p.key + ", " + p.value + "}";
+}
+
 // ================================= Constructor ===============================
 void test_defaultConstructor()
 {
 	hashtable<Pair> t1(10);
-	assert(t1.slots == 10);
+	assert(t1.slots == 10);		// size = 10
 
 	hashtable<Pair> t2(20);
-	assert(t2.slots == 20);
+	assert(t2.slots == 20);		// size = 20
+
+	assert(t1.toString(0) == "[]" && t1.toString(1) == "[]" && t2.toString(0) == "[]" && t2.toString(1) == "[]");
+	// all of those cases should be empty -- the hash table is empty
 }
 
 
@@ -87,7 +99,7 @@ void test_insert_and_get()
 	p.value = "value";
 
 	Pair pCopy;						//collision test
-	pCopy.key = "key";
+	pCopy.key = "yek";
 	pCopy.value = "value";
 
 	Pair p1;
@@ -118,11 +130,11 @@ void test_insert_and_get()
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
 
+	assert(t1.toString(result) == "[{yek, value}, {key, value}]");	// collision appends at head correctly
+	assert(t1.toString(result1) == "[{dog, cat}]");									// test ran correctly
+	assert(t1.toString(result2) == "[{rain, snow}]");								// test ran correctly
 
 	//cout << t1.get(p) << endl;
-
-
-	//cout << t1.toString(result) << endl;
 }
 
 
@@ -134,7 +146,7 @@ void test_remove()
 	p.value = "value";
 
 	Pair pCopy;						//collision test
-	pCopy.key = "key";
+	pCopy.key = "yek";
 	pCopy.value = "value";
 
 	Pair p1;
@@ -165,11 +177,14 @@ void test_remove()
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
 
-
 	t1.remove(p);
-	t1.remove(p);
+	assert(t1.toString(result) == "[{yek, value}]");
+	t1.remove(pCopy);
+	assert(t1.toString(result) == "[]");
 	t1.remove(p1);
+	assert(t1.toString(result1) == "[]");
 	t1.remove(p2);
+	assert(t1.toString(result2) == "[]");
 }
 
 
@@ -181,7 +196,7 @@ void test_operator()
 	p.value = "value";
 
 	Pair pCopy;						//collision test
-	pCopy.key = "key";
+	pCopy.key = "yek";
 	pCopy.value = "value";
 
 	Pair p1;
@@ -215,11 +230,17 @@ void test_operator()
 	hashtable<Pair> t2(10);					//table2
 	t2 = t1;
 
-	t1.remove(p);
+	assert(t1.toString(result) == t2.toString(result) && t2.toString(result1) == t1.toString(result1) && t2.toString(result2) == t1.toString(result2));
+
+	// those should all be equal since we copied one to the other
+
+	t1.remove(p);		// remove everything
 	t1.remove(p1);
 	t1.remove(p2);
 
 	t2 = t1;
+
+	assert(t1.toString(result) == t2.toString(result) && t2.toString(result1) == t1.toString(result1) && t2.toString(result2) == t1.toString(result2));
 }
 
 

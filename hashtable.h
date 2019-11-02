@@ -12,7 +12,7 @@ Project 6
 #include "List.h"
 #include <string>
 
-int DEFAULT_SIZE = 10;
+int DEFAULT_SIZE = 100000;
 
 template <class KeyType>
 class hashtable : public List<KeyType>
@@ -32,6 +32,7 @@ class hashtable : public List<KeyType>
 
     int slots;    //how many slots are in the table
     List<KeyType>* table; // an array of linked lists. ie slots
+    int count;
 };
 
 

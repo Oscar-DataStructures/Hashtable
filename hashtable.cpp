@@ -22,6 +22,7 @@ hashtable<KeyType>::hashtable(int numSlots)
 //Preconditions:  N/A
 //Postcondition:  dynamically allocated table with size numSlots where each list in array is null
 {
+  count = 0;
   slots = numSlots;
   table = new List<KeyType>[numSlots];    //dynamically allocated table
   for(int i = 0; i < table->size; i++)    //iterates throughout the table
@@ -37,6 +38,7 @@ hashtable<KeyType>::hashtable(const hashtable<KeyType>& h)
 //Preconditions:  Can only be used for construction
 //Postcondition:  Current hashtable will be a copy of h hashtable
 {
+  count = h.count;
   slots = h.slots;
   table = new List<KeyType>[slots];   //dynamically allocated table
   table->size = h.table->size;
@@ -53,6 +55,7 @@ hashtable<KeyType>::~hashtable()
 //Preconditions:  Hashtable must exist to be deallocated
 //Postcondition:  Deallocates memory and destroys existing bst
 {
+  count = 0;
   for(int i = 0; i < table->size; i++)
   {
     List<KeyType>::~List();   //inherits Lists DeConstructor and ultizes it
@@ -107,6 +110,7 @@ void hashtable<KeyType>::insert(KeyType* k)
 {
   int hSlots = k->hash(slots);
   table[hSlots].headAppend(k);
+  count++;
 }
 
 
@@ -119,6 +123,7 @@ void hashtable<KeyType>::remove(const KeyType& k)   //TODO[ASK]: how const chang
 {
   int hSlots = k.hash(slots);
   table[hSlots].remove(k);    //calls the list remove which has key error catch
+  count--;
 }
 
 
@@ -138,10 +143,16 @@ hashtable<KeyType>& hashtable<KeyType>::operator=(const hashtable<KeyType>& h)
 //Preconditions:  N/A
 //Postcondition:  Returns hashtable that is the same as the parameter hashtable h
 {
-  for (int i = 0; i < table->size; i++)   //iterates through the hashtable
+  if (h.table != this->table)
   {
-    table[i] = h.table[i];    //Assignment using the list assignment method
+    delete [] table;
+    for (int i = 0; i < h.slots; i++)   //iterates through the hashtable
+    {
+      table[i] = h.table[i];    //Assignment using the list assignment method
+    }
   }
+
+  slots = h.slots;
 
   return *this;
 }
@@ -153,7 +164,6 @@ string hashtable<KeyType>::toString(int slot) const
 //Preconditions:  N/A
 //Postcondition:  Return string representation of linked list at slot
 {
-  cout << table[slot].size << endl;
   string result = table[slot].toString();   //uses the list toString method
 
   return result;

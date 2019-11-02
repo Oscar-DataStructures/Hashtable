@@ -105,7 +105,7 @@ void List<T>::headAppend(T* item)
 
 	else
 	{
-		head->next = node;
+		node->next = head;
 		head = node;
 	}
 
@@ -138,31 +138,32 @@ void List<T>::remove(const T& item)
 	Node<T>* current = head;
 	Node<T>* tmp = head;
 
-	if (size == 0)		//delete first item
+	if (*head->data == item)
 	{
-		delete current;
-		return;
+		Node<T> * temp = head;
+		head = head->next;
+		delete temp;
 	}
-
-	while (current->next != NULL && *current->next->data != item)	//traverse the list
+	else
 	{
-		tmp = current;
-		current = current->next;
+    while (current->next != NULL)
+    {
+			if (*current->next->data == item)
+			{
+				break;
+			}
+      current = current->next;
+    }
 
-		if (current->next == NULL && *current->next->data == item)	//item found
-		{
-				tmp = current->next;
-				current->next = current->next->next;
-				delete tmp;
-				return;
-		}
-
+		if (current->next == NULL) throw KeyError();
 		else
 		{
-			throw KeyError();
+			Node<T> * temp = current->next;
+			current->next = current->next->next;
+			delete temp;
 		}
 	}
-	size--;
+  size--;
 }
 
 
@@ -321,6 +322,7 @@ List<T>& List<T>::operator=(const List<T>& src)
 			Node<T>* temp = t;
 			t = t-> next;
 			delete temp;
+			size--;
 		}
 		deepCopy(src);
 	}
@@ -338,44 +340,60 @@ ostream &operator<< (ostream &os, const List<T>& list)
 
 
 // ============================= To String Method ==============================
-template <class T>
-std::string List<T>::toString() const
+// toStringRecursive is a recursive helper function that handles the middle part of the string output.
+template <typename T>
+std::string List<T>::toStringRecursive(Node<T>* front) const // recursive bit handles the inner part of the toString output
 {
+  if (front == NULL) // if list is empty
+    return "";
   std::stringstream ss;
-  Node<T>* current = head;
+  ss << *front->data; // insert element
+  if (front->next != NULL) // if there is a next item
+      ss << ", "; // insert the comma and space for formatting
+  return ss.str()+ toStringRecursive(front->next); // look at the next item
+}
 
-  ss << "[";
-  ss << current->data;
-  for (int i = 1; i < size; i++)
-  {
-		// if (current->next == NULL)	//if next is null then we can stop there
-		// {
-		// 	break;
-		// }
-    ss << ", ";
-    current = current->next;
-    ss << current->data;		//error here
-  }
-
-  ss << "]";
-  return ss.str();
+template <typename T>
+std::string List<T>::toString() // handles the outer parts of the toString output
+{
+  string finalString = "[";
+  string values = toStringRecursive(head);
+  finalString += values + "]";
+  return finalString;
 }
 
 
 // ============================= Deep Copy Method =============================
 template <class T>
- List<T>& List<T>::deepCopy(const List<T>& src)
+ List<T>& List<T>::deepCopy(const List<T>& otherList)
  {
-	 Node<T>* current = src.head;
-	 cout << src.size << endl;
-		 for(int i=0; i < src.size; i++)  //sets each node equal to desired node data
-		 {
-			 append(current-> data);
-			 if(i < src.size-1)
-			 {
-				 current = current-> next;
-		 	 }
-		 }
-
-	 return *this;
+	 head = NULL;
+	 Node<T>* current = new Node<T>;
+   size = otherList.size;
+   for (Node<T> * n = otherList.head; n != NULL; n = n->next)
+   {
+     Node<T> * newNode = new Node<T>;
+     newNode->data = n->data;
+     if (head == NULL)
+     {
+       head = newNode;
+     }
+     else
+       current->next = newNode;
+     current = newNode;
+   }
+	 // Node<T>* current = src.head;
+	 // cout << src.size << endl;
+		//  for(int i=0; i < src.size; i++)  //sets each node equal to desired node data
+		//  {
+		// 	 append(current-> data);
+		// 	 if(i < src.size-1)
+		// 	 {
+		// 		 current = current-> next;
+		//  	 }
+		//  }
+	 //
+		//  size = src.size;
+	 //
+	 // return *this;
  }

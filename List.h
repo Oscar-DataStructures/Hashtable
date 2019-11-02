@@ -48,7 +48,8 @@ class List : public Node<T>
 		T* pop(int index); // delete the item in position index
 		int length() const; // returns the length of the list
 		int index(const T& item) const; // return index of value item, or -1 if not found
-    std::string toString() const; // return a string representation of the list
+    std::string toString(); // return a string representation of the list
+		std::string toStringRecursive(Node<T>* front) const;
 
     T& operator[](int index) const; // indexing operator
     List<T>& operator=(const List& src); // assignment operator
@@ -57,7 +58,7 @@ class List : public Node<T>
 		Node<T>* head;
 		Node<T>* tail;
 		int size;
-		List<T>& deepCopy(const List<T>& src);
+		List<T>& deepCopy(const List<T>& otherList);
 };
 
 template <class T>
