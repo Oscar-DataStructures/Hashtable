@@ -168,7 +168,7 @@ void List<T>::remove(const T& item)
 
 // =============================== Insert Method ===============================
 template <class T>
-T* List<T>::insert(int index, T* item)
+void List<T>::insert(int index, T* item)
 {
 	Node<T>* temp = new Node<T>(item);
 	Node<T>* node = head;
@@ -202,9 +202,39 @@ T* List<T>::insert(int index, T* item)
  }
 
 
+
+// ================================ Find Method ================================
+template <class T>
+T* List<T>:: find(T item)
+{
+	Node<T>* current = head;
+	T* k = &item;
+
+	for(int i = 0; i < size; i++)
+	{
+		cout << k << endl;
+		cout << current << endl;
+
+
+		if (current->data == k)
+		{
+			return k;
+		}
+
+		else if (current->next == NULL)
+		{
+			throw KeyError();
+		}
+
+		current = current-> next;
+	}
+
+}
+
+
  // ================================ Pop Method ================================
  template <class T>
- void List<T>::pop(int index)
+ T* List<T>::pop(int index)
  {
  	Node<T>* current = head;
  	Node<T>* nxt = head;
@@ -244,14 +274,13 @@ T* List<T>::insert(int index, T* item)
 
 //================================ Index  Method ===============================
  template <class T>
- int List<T>::index(T item) const
+ int List<T>::index(const T& item) const
  {
-
+	 T itemSet = item;
    Node<T>* current = head;
    for(int i = 0; i < size; i++)  //goes through all nodes until index and gets data at index
    {
-		 cout << "item: " << item.key << " data: " << current->data->key << endl;
-     if (item == *current-> data)
+     if (itemSet == *current-> data)
        return i;
      else
        current = current-> next;
@@ -319,10 +348,10 @@ std::string List<T>::toString() const
   ss << current->data;
   for (int i = 1; i < size; i++)
   {
-		if (current->next == NULL)	//if next is null then we can stop there
-		{
-			break;
-		}
+		// if (current->next == NULL)	//if next is null then we can stop there
+		// {
+		// 	break;
+		// }
     ss << ", ";
     current = current->next;
     ss << current->data;		//error here

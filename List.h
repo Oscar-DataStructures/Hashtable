@@ -43,10 +43,11 @@ class List : public Node<T>
 		void headAppend(T* item); //append a new item to the head of the list
     int count(T item) const; // return the number of times a item is in the list
 		void remove(const T& item); // delete the first instance of the item
-    T* insert(int index, T* item); // insert item in position index
-		void pop(int index); // delete the item in position index
+    void insert(int index, T* item); // insert item in position index
+		T* find(T item); //returns a pointer to the item
+		T* pop(int index); // delete the item in position index
 		int length() const; // returns the length of the list
-		int index(T item) const; // return index of value item, or -1 if not found
+		int index(const T& item) const; // return index of value item, or -1 if not found
     std::string toString() const; // return a string representation of the list
 
     T& operator[](int index) const; // indexing operator

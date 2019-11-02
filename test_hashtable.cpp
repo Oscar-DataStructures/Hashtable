@@ -111,13 +111,16 @@ void test_insert_and_get()
 	Pair* pCopyPoint = &pCopy;		//used to test collision
 	t1.insert(pCopyPoint);
 
+
 	Pair* pPoint1 = &p1;
 	t1.insert(pPoint1);
 
 	Pair* pPoint2 = &p2;
 	t1.insert(pPoint2);
 
-	cout << t1.get(p) << endl;
+
+	//cout << t1.get(p) << endl;
+
 
 	//cout << t1.toString(result) << endl;
 }

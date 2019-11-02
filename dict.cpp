@@ -16,7 +16,7 @@ using namespace std;
 
 // ================================= Constructor ===============================
 template <class KeyType1, class KeyType2>
-Dictionary<KeyType1, KeyType2>::Dictionary() : hashtable<KeyType>(int numSlots)
+Dictionary<KeyType1, KeyType2>::Dictionary() : hashtable<KeyType1>(int numSlots)
 //Preconditions:  N/A
 //Postcondition:  Inherits hashtable constructor
 {
@@ -40,12 +40,9 @@ bool Dictionary<KeyType1, KeyType2>::empty() const
 //Preconditions:  Tree must exist
 //Postcondition:  Returns whether or not dict is empty
 {
-  int size = 0;
-  for (list : table)
-  {
-    size += list.length();
-  }
-  return size == 0;
+  int check = hashtable<Pair<KeyType1, KeyType2>>::slotSize();
+
+  return check == 0;
 }
 
 
@@ -66,21 +63,21 @@ void Dictionary<KeyType1, KeyType2>::insert(KeyType1 k, KeyType2 v)
 // PreConditions:   N/A
 // PostConditions:  Inherits bst insert method to insert into dict value k
 {
-  try   // if a GetError is received, that means k is not yet in the dict so we can add it
+  try   // if a KeyError is received, that means k is not yet in the dict so we can add it
   {
     Pair<KeyType1, KeyType2> exists = get(k);
   }
 
-  catch(GetError)   // add it
+  catch(KeyError e)   // add it
   {
-    hashtable<KeyType>::insert(k);      //hashtable inheritance
+    hashtable<Pair<KeyType1, KeyType2>>::insert(k);      //hashtable inheritance
     return;
   }
 
   // else - it was found so throw KeyError
-  {
-    throw KeyError();             //KeyError caught
-  }
+  // {
+  //   throw KeyError();             //KeyError caught
+  // }
 
 }
 
@@ -91,5 +88,5 @@ void Dictionary<KeyType1, KeyType2>::remove(const KeyType1& k)
 //Preconditions:  Tree must exist
 //Postcondition:  Inherits remove method from hashtable to remove value k from dict
 {
-  hashtable<KeyType>::remove(k);      //hashtable inheritance
+  hashtable<Pair<KeyType1, KeyType2>>::remove(k);      //hashtable inheritance
 }

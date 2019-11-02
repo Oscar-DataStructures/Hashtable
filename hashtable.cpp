@@ -62,11 +62,13 @@ hashtable<KeyType>::~hashtable()
 
 // ================================= Get Method ================================
 template <class KeyType>
-KeyType* hashtable<KeyType>::get(const KeyType& k) const  //TODO [ASK]: why const and what does that do
+KeyType* hashtable<KeyType>::get(const KeyType& k) const
 //Preconditions:  K must be a pair that exists in hashtable
 //Postcondition:  Throws a key error if not found and returns pointer if found
 {
   int hSlots = k.hash(slots);   //can only call const functions on k bc k is const
+  KeyType kSet = k;
+  KeyType* kptr = &kSet;
   int result = table[hSlots].index(k);    //index method returns -1 if not found and index if found
   if (result == -1)   //not found
   {
@@ -75,20 +77,31 @@ KeyType* hashtable<KeyType>::get(const KeyType& k) const  //TODO [ASK]: why cons
 
   else    //found so return pointer
   {
+    Node<KeyType>* current = table[hSlots].head;
     for(int i = 0; i < table->size; i++)    //iterates throughout the table
     {
-      if ((table[hSlots][i]) == k)    //so the logic here is that we find the element in the list and return the pointer to it
-      {                                //that way we dont have to return k which is const
-        return table[hSlots][i];
-      }
+      if (kptr == current-> data)
+        return kptr;
+      // if ((table[hSlots]) == k)    //so the logic here is that we find the element in the list and return the pointer to it
+      // {                                //that way we dont have to return k which is const
+      //   return table[hSlots][i];
+      // }
+      else
+        current = current->next;
     }
   }
+
+  // int hSlots = k.hash(slots);
+  // KeyType* result = table[hSlots].find(k);
+  //
+  // return result;
 }
+
 
 
 // ================================ Insert Method ==============================
 template <class KeyType>
-void hashtable<KeyType>::insert(KeyType* k) //TODO [CHECK]: might need to change list insert to insert node at head of list
+void hashtable<KeyType>::insert(KeyType* k)
 //Preconditions:  N/A
 //Postcondition:  k will be inserted into the hashtable at the apriopiate slot
 {
@@ -106,6 +119,16 @@ void hashtable<KeyType>::remove(const KeyType& k)   //TODO[ASK]: how const chang
 {
   int hSlots = k.hash(slots);
   table[hSlots].remove(k);    //calls the list remove which has key error catch
+}
+
+
+// ============================== Slot Size Method =============================
+template <class KeyType>
+int hashtable<KeyType>::slotSize()
+//Preconditions:  N/A
+//Postcondition:  N/A
+{
+  return slots;
 }
 
 
